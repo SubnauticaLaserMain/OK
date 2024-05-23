@@ -46,8 +46,26 @@ Render.CreateOptionsButton({
                         Hilight.Adornee = items[i]
                         Hilight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
                         Hilight.FillTransparency = 0.5
-                        Hilight.FillColor = Color3.new(1, 1, 1)
+                        Hilight.FillColor = items[i].Color
                     end
+                end
+            end
+        else
+            local a = Workspace:getDescendants()
+            local items = {}
+
+
+            --- First Check
+            for i = 1, #a do
+                if a[i].Name == 'ItemPickupScript' and a[i].Parent:findFirstChild('ClickDetector') then
+                    table.insert(items, a[i].Parent)
+                end
+            end
+
+
+            for i = 1, #items do
+                if items[i]:FindFirstChild('ESP') then
+                    items[i].ESP:Destroy()
                 end
             end
         end
