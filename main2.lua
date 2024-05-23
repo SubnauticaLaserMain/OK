@@ -90,116 +90,33 @@ local PlayerESP = Render.CreateOptionsButton({
     Name = 'ESP',
     Function = function(callback)
         if callback then
-            local IsPlayer = false
-
-
-            for i, v in Workspace.PeppaNPC:GetChildren() do
-                if v and v.ClassName == 'Model' then
-                    IsPlayer = false
-                    break
-                else
-                    IsPlayer = true
-                    break
-                end
-            end
-
-
-            if IsPlayer then
-                local Piggy = {}
-
-
+            while callback and wait(1) do
                 for i, v in game:GetService('Players'):GetPlayers() do
-                    local Humanoid = v.Character:WaitForChild('Humanoid', 10)
+                    local Character = v.Character or v.CharacterAdded:Wait()
 
 
-                    if Humanoid.Health == math.huge then
-                        table.insert(Piggy, v)
-                    end
-                end
+                    if not Character:FindFirstChild('ESP') then
+                        local a = Instance.new('Highlight', Character)
 
 
-
-                if Piggy then
-                    while wait(1) do
-                        for i = 1, #Piggy do
-                            if not Piggy[i]:FindFirstChild('ESP') then
-                                local Hilight = Instance.new('Highlight', Piggy[i])
-
-                                Hilight.Adornee = Piggy[i]
-                                Hilight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-                                Hilight.FillTransparency = 0.5
-                                Hilight.FillColor = Color3.new(1, 1, 1)
-                                Hilight.Name = 'ESP'
-                            end
-                        end
-                    end
-                end
-            else
-                local Piggy = {}
-
-
-                for i, v in Workspace.PeppaNPC:GetChildren() do
-                    if v and v.ClassName == 'Model' then
-                        table.insert(Piggy, v)
-                    end
-                end
-
-
-                if Piggy then
-                    while wait(1) do
-                        for i = 1, #Piggy do
-                            if not Piggy[i]:FindFirstChild('ESP') then
-                                local Hilight = Instance.new('Highlight', Piggy[i])
-
-                                Hilight.Adornee = Piggy[i]
-                                Hilight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-                                Hilight.FillTransparency = 0.5
-                                Hilight.FillColor = Color3.new(1, 1, 1)
-                                Hilight.Name = 'ESP'
-                            end
-                        end
+                        a.Name = 'ESP'
+                        a.FillTransparency = 0.5
+                        a.FillColor = Color3.new(1, 1, 1)
+                        a.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+                        a.Adornee = Character
                     end
                 end
             end
         else
-            for i, v in Workspace:getDescendants() do
-                if v.Name == 'ESP' and v.ClassName == 'Highlight' then
-                    v:Destroy()
-                    break
+            for i, v in game:GetService('Players'):GetPlayers() do
+                local Character = v.Character or v.CharacterAdded:Wait()
+
+
+                if Character:FindFirstChild('ESP') then
+                    Character.ESP:Destroy()
                 end
             end
         end
     end,
     HoverText = 'Apply ESP to ALL Selected Players'
 })
-
-
-
-
-PlayerEnabled = PlayerESP.CreateToggle({
-    Name = 'Players',
-    Function = function(callback) end,
-    HoverText = 'Apply to Players',
-    Default = true
-})
-
-
-
-PiggySelected = PlayerESP.CreateToggle({
-    Name = 'Piggys',
-    Function = function(callback) end,
-    HoverText = 'Apply to Piggy(s)',
-    Default = true
-})
-
-
-
-
-
-
-
-
-
--- loadstring(game:HttpGet('https://raw.githubusercontent.com/SubnauticaLaserMain/OK/main/main2.lua', true))()
-
-
