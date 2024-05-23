@@ -45,8 +45,8 @@ Render.CreateOptionsButton({
                         Hilight.Name = 'ESP'
                         Hilight.Adornee = items[i]
                         Hilight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-                        Hilight.FillTransparency = 2
-                        Hilight.FillColor = Color3.new(1, 1, 1)
+                        Hilight.FillTransparency = 0.5
+                        Hilight.FillColor = items[i].Color
                     end
                 end
             end
