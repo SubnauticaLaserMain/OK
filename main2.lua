@@ -120,3 +120,98 @@ local PlayerESP = Render.CreateOptionsButton({
     end,
     HoverText = 'Apply ESP to ALL Selected Players'
 })
+
+
+
+
+Render.CreateOptionsButton({
+    Name = 'BotESP',
+    Function = function(callback) 
+        if callback then
+            while callback and wait(1) do
+                local Bots = {}
+
+
+                for i, v in Workspace.PeppaNPC:GetChildren() do
+                    if v and v.ClassName == 'Model' then
+                        table.insert(Bots, v)
+                    else
+                        continue
+                    end
+                end
+
+
+                if not Bots[1] then
+                    continue
+                else
+                    for i = 1, #Bots do
+                        if not Bots[i]:FindFirstChild('ESP') then
+                            local ESP = Instance.new('Highlight', Bots[i])
+
+
+                            ESP.Adornee = Bots[i]
+                            ESP.FillTransparency = 0.5
+                            ESP.FillColor = Color3.new(1, 1, 1)
+                            ESP.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+                            ESP.Name = 'ESP'
+
+
+                            
+
+                            local character = Bots[i]
+
+
+
+                            local head = character:WaitForChild("Head")
+
+                            -- Create BillboardGui
+                            local billboardGui = Instance.new("BillboardGui")
+                            billboardGui.Name = "NameTag"
+                            billboardGui.Adornee = head
+                            billboardGui.Size = UDim2.new(0, 200, 0, 50)
+                            billboardGui.StudsOffset = Vector3.new(0, 2, 0)  -- Offset the BillboardGui above the player's head
+                            billboardGui.AlwaysOnTop = true
+
+                            -- Create TextLabel
+                            local textLabel = Instance.new("TextLabel")
+                            textLabel.Parent = billboardGui
+                            textLabel.Size = UDim2.new(1, 0, 1, 0)
+                            textLabel.BackgroundTransparency = 1
+                            textLabel.Text = 'Bot'
+                            textLabel.TextColor3 = Color3.new(1, 1, 1)  -- White text
+                            textLabel.TextStrokeTransparency = 0.5
+                            textLabel.TextScaled = true
+
+                            -- Parent the BillboardGui to the character's head
+                            billboardGui.Parent = head
+                        end
+                    end
+                end
+            end
+        else
+            for i, v in Workspace.PeppaNPC:GetChildren() do
+                if v and v.ClassName == 'Model' then
+                    if v:FindFirstChild('ESP') then
+                        v:FindFirstChild('ESP'):Destroy()
+                    end
+                end
+            end
+        end
+    end,
+    HoverText = 'Apply ESP to Bots',
+    Default = false
+})
+
+
+
+
+
+
+
+
+
+
+
+-- loadstring(game:HttpGet('https://raw.githubusercontent.com/SubnauticaLaserMain/OK/main/main2.lua', true))()
+
+
