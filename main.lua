@@ -132,11 +132,21 @@ Render.CreateOptionsButton({
                 local Bots = {}
 
 
-                for i, v in Workspace.PeppaNPC:GetChildren() do
-                    if v and v.ClassName == 'Model' then
-                        table.insert(Bots, v)
-                    else
-                        continue
+                if game.PlaceId == 5661005779 then
+                    for i, v in Workspace.PiggyNPC:GetChildren() do
+                        if v and v.ClassName == 'Model' then
+                            table.insert(Bots, v)
+                        else
+                            continue
+                        end
+                    end
+                else
+                    for i, v in Workspace.PeppaNPC:GetChildren() do
+                        if v and v.ClassName == 'Model' then
+                            table.insert(Bots, v)
+                        else
+                            continue
+                        end
                     end
                 end
 
@@ -190,10 +200,20 @@ Render.CreateOptionsButton({
                 end
             end
         else
-            for i, v in Workspace.PeppaNPC:GetChildren() do
-                if v and v.ClassName == 'Model' then
-                    if v:FindFirstChild('ESP') then
-                        v:FindFirstChild('ESP'):Destroy()
+            if game.PlaceId == 5661005779 then
+                for i, v in Workspace.PiggyNPC:GetChildren() do
+                    if v and v.ClassName == 'Model' then
+                        if v:FindFirstChild('ESP') then
+                            v:FindFirstChild('ESP'):Destroy()
+                        end
+                    end
+                end
+            else
+                for i, v in Workspace.PeppaNPC:GetChildren() do
+                    if v and v.ClassName == 'Model' then
+                        if v:FindFirstChild('ESP') then
+                            v:FindFirstChild('ESP'):Destroy()
+                        end
                     end
                 end
             end
